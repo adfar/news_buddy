@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+<body>
+    <h1 id="title">Story:<a id="link">Story here</a></h1>
+    <script>
+        let stock = 'MSFT';
+        fetch("https://api.thenewsapi.com/v1/news/top?api_token=lRMpLG6ZvfpI4njzRWqfQ7QWLvhq1qGCJbmfJXP4&locale=us&limit=3")
+        .then(response => response.json())
+        .then(data => document.getElementById("link").setAttribute("href", data['data'][0]['url']));
+    </script>
+</body>
+</html>
