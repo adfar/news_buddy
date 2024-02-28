@@ -6,12 +6,29 @@
     <title>Test</title>
 </head>
 <body>
-    <h1 id="title">Story:<a id="link">Story here</a></h1>
+    <form id="urlform" action="http://127.0.0.1:8000/summary" method="post">
+        <input type="text" name="url">
+        <input type="submit">
+    </form>
+    <h1>Summary</h1>
+    <p id="summary"></p>
     <script>
-        let stock = 'MSFT';
-        fetch("https://api.thenewsapi.com/v1/news/top?api_token=lRMpLG6ZvfpI4njzRWqfQ7QWLvhq1qGCJbmfJXP4&locale=us&limit=3")
-        .then(response => response.json())
-        .then(data => document.getElementById("link").setAttribute("href", data['data'][0]['url']));
+        function summarizeForm(e) {
+            e.preventDefault();
+
+            let urlform = document.getElementById("urlform");
+            let url = new FormData(urlform);
+
+            fetch("http:localhost:8000/summary", {
+                method: "POST",
+                body: url,
+            })
+            .then(response => response.text())
+            .then(data => document.getElementById("summary").innerHTML = data);
+        }
+
+        let urlform = document.getElementById("urlform");
+        urlform.addEventListener("submit", summarizeForm);
     </script>
 </body>
 </html>
