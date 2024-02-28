@@ -16,7 +16,7 @@ async def summarize(url: Annotated[str, Form()]):
     """Returns a summary of 'url'"""
     loader = WebBaseLoader(url)
     docs = loader.load()
-    llm = ChatOpenAI(temperature=0, model_name="gpt-4-turbo-preview")
+    llm = ChatOpenAI(temperature=0, model_name="gpt-4-turbo-preview")  # needs API key
     chain = load_summarize_chain(llm, chain_type="stuff")
     output = chain.invoke(docs)
     return output["output_text"]
