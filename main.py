@@ -1,9 +1,12 @@
+from dotenv import load_dotenv
 from fastapi import FastAPI, Form
 from fastapi.middleware.cors import CORSMiddleware
 from langchain.chains.summarize import load_summarize_chain
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_openai import ChatOpenAI
 from typing import Annotated
+
+load_dotenv()
 
 app = FastAPI()
 
