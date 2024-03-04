@@ -3,21 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+    <link rel="stylesheet" href="styles.css">
+    <title>Chat</title>
 </head>
 <body>
-    <form id="urlform" action="http://127.0.0.1:8000/summary" method="post">
-        <input type="text" name="url">
-        <input type="submit">
-    </form>
-    <h1>Summary</h1>
-    <p id="summary"></p>
+    <div class="container">
+        <h1>#</h1>
+        <div class="navbar">
+            <span><a href="index.html">Home</a></span>
+            <span>Politics</span>
+            <span><a href="business.html">Business</a></span>
+            <span>Technology</span>
+            <span>Gaming</span>
+        </div>
+        <div class="main">
+            <h2>Article</h2>
+            <div id="summary" class="content">
+                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+                Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. 
+                Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. 
+                Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. 
+                Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. 
+                Donec non enim in turpis pulvinar facilisis. Ut felis. 
+                Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. 
+                Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus
+            </div>
+        </div>
+        <div class="preview one">Two</div>
+        <div class="preview two">Three</div>
+        <form id="chatform" action="http://127.0.0.1:8000/summary" method="post">
+            <input id="chatbox" type="text" name="url" autofocus>
+        </form>
+    </div>
     <script>
+        const chatbox = document.getElementById("chatbox");
+        chatbox.addEventListener("blur", () => 
+            setTimeout(() => chatbox.focus(), 10));
+        document.body.addEventListener("mouseenter", () => chatbox.focus());
+
+        let chatform = document.getElementById("chatform");
+        chatform.addEventListener("submit", summarizeForm);
+
         function summarizeForm(e) {
             e.preventDefault();
 
-            let urlform = document.getElementById("urlform");
-            let url = new FormData(urlform);
+            let chatform = document.getElementById("chatform");
+            let url = new FormData(chatform);
+            chatbox.value = "";
 
             fetch("http:localhost:8000/summary", {
                 method: "POST",
@@ -26,9 +58,6 @@
             .then(response => response.text())
             .then(data => document.getElementById("summary").innerHTML = data);
         }
-
-        let urlform = document.getElementById("urlform");
-        urlform.addEventListener("submit", summarizeForm);
     </script>
 </body>
 </html>
