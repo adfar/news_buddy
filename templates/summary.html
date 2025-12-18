@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Daily Summary - AI News Buddy{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Daily Summary</h1>
+    {% if summary %}
+    <p class="subtitle">{{ summary.date }}</p>
+    {% endif %}
+</div>
+
+{% if summary %}
+<div class="summary-content">
+    {{ summary.content | safe }}
+</div>
+<p class="summary-meta">Generated on {{ summary.created_at.strftime('%B %d, %Y at %H:%M') }}</p>
+{% else %}
+<div class="empty-state">
+    <p>No summary available yet. Run <code>uv run python main.py summarize</code> to generate one.</p>
+</div>
+{% endif %}
+{% endblock %}

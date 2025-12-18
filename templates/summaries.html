@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Summary Archive - AI News Buddy{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Summary Archive</h1>
+    <p class="subtitle">Past daily digests</p>
+</div>
+
+{% if summaries %}
+<div class="summary-list">
+    {% for summary in summaries %}
+    <div class="summary-card">
+        <h2>{{ summary.date }}</h2>
+        <div class="summary-preview">
+            {{ summary.content[:300] | safe }}...
+        </div>
+        <p class="summary-meta">Generated {{ summary.created_at.strftime('%B %d, %Y') }}</p>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <p>No summaries yet. They will appear here after the first daily summary is generated.</p>
+</div>
+{% endif %}
+{% endblock %}

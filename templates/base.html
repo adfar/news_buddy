@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI News Buddy{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/" class="logo">📰 AI News Buddy</a>
+            <div class="nav-links">
+                <a href="/" class="{% if request.url.path == '/' %}active{% endif %}">Feed</a>
+                <a href="/summary" class="{% if request.url.path == '/summary' %}active{% endif %}">Today's Summary</a>
+                <a href="/summaries" class="{% if request.url.path == '/summaries' %}active{% endif %}">Archive</a>
+            </div>
+        </div>
+    </nav>
+    
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    
+    <footer class="footer">
+        <div class="container">
+            <p>AI News Buddy • Tracking OpenAI, Anthropic, DeepMind</p>
+        </div>
+    </footer>
+</body>
+</html>
